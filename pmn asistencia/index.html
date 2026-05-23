@@ -3,70 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PMN - Control de Asistencia</title>
-    <link rel="stylesheet" href="style.css">
+    <title>PMN - Registro de Asistencia</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- Pantalla Inicio -->
-    <section id="inicio" class="pantalla activa">
-        <h1>Sistema de Control de Asistencia</h1>
-        <button onclick="mostrarPantalla('evento')">
-            Ingresar al evento
-        </button>
-    </section>
-
-    <!-- Pantalla Evento -->
-    <section id="evento" class="pantalla">
-        <h2>Evento Activo</h2>
-
+    <!-- PANTALLA 1 -->
+    <section id="pantallaInicio" class="pantalla activa">
         <div class="card">
-            <p><strong>Evento:</strong> Taller de Redes</p>
-            <p><strong>Estado:</strong> Activo</p>
-            <p><strong>Hora inicio:</strong> 08:00</p>
-            <p><strong>Tolerancia:</strong> Hasta 08:10</p>
-        </div>
+            <h1>Registro de Asistencia</h1>
 
-        <button onclick="mostrarPantalla('registro')">
-            Registrar asistencia
-        </button>
-    </section>
+            <div class="info-evento">
+                <p><strong>Evento:</strong> Reunión General</p>
+                <p><strong>Estado:</strong> <span id="estadoEvento">Activo</span></p>
+                <p><strong>Hora inicio:</strong> 08:00</p>
+                <p><strong>Tolerancia:</strong> 10 minutos</p>
+            </div>
 
-    <!-- Pantalla Registro -->
-    <section id="registro" class="pantalla">
-        <h2>Registro de Asistencia</h2>
-
-        <div class="formulario">
-            <label>Nombre participante</label>
-            <input type="text" id="nombre" value="Juan Pérez">
-
-            <label>Hora de llegada</label>
-            <input type="time" id="hora" value="08:14">
-
-            <button onclick="registrarAsistencia()">
-                Registrar
+            <button id="btnRegistrar">
+                Registrar asistencia
             </button>
         </div>
     </section>
 
-    <!-- Pantalla Resultado -->
-    <section id="resultado" class="pantalla">
-        <h2>Resultado Registro</h2>
+    <!-- PANTALLA 2 -->
+    <section id="pantallaFormulario" class="pantalla">
+        <div class="card">
 
-        <div class="resultado-card">
-            <p id="mensajeResultado"></p>
-            <p id="estadoResultado"></p>
-            <p id="horaResultado"></p>
+            <button class="volver" id="volverInicio">
+                ← Volver
+            </button>
+
+            <h2>Registro de asistencia</h2>
+
+            <form id="formAsistencia">
+
+                <label>Nombre participante</label>
+                <input
+                    type="text"
+                    id="nombre"
+                    placeholder="Ingrese nombre"
+                    required
+                >
+
+                <label>Hora de llegada</label>
+                <input
+                    type="time"
+                    id="hora"
+                    required
+                >
+
+                <button type="submit">
+                    Confirmar registro
+                </button>
+
+            </form>
+
+            <div class="mensaje" id="mensajeError"></div>
+
         </div>
-
-        <button>
-            Continuar
-        </button>
-        <button onclick="mostrarPantalla('inicio')">
-        Volver al inicio
-        </button>
     </section>
 
-    <script src="app.js"></script>
+    <!-- PANTALLA 3 -->
+    <section id="pantallaResultado" class="pantalla">
+        <div class="card">
+
+            <h2>Resultado del registro</h2>
+
+            <div class="resultado-box">
+                <p><strong>Participante:</strong> <span id="resultadoNombre"></span></p>
+                <p><strong>Hora registrada:</strong> <span id="resultadoHora"></span></p>
+                <p><strong>Estado final:</strong> <span id="resultadoEstado"></span></p>
+            </div>
+
+            <div id="bloqueJustificacion" class="oculto">
+
+                <h3>Ingresar justificación</h3>
+
+                <textarea
+                    id="textoJustificacion"
+                    placeholder="Ingrese motivo..."
+                ></textarea>
+
+                <button id="btnJustificar">
+                    Enviar justificación
+                </button>
+
+                <div class="mensaje" id="mensajeJustificacion"></div>
+
+            </div>
+
+            <button id="volverMenu">
+                Volver al inicio
+            </button>
+
+        </div>
+    </section>
+
+    <script src="js/app.js"></script>
+
 </body>
 </html>
