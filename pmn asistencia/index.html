@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMN - Control de Asistencia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Pantalla Inicio -->
+    <section id="inicio" class="pantalla activa">
+        <h1>Sistema de Control de Asistencia</h1>
+        <button onclick="mostrarPantalla('evento')">
+            Ingresar al evento
+        </button>
+    </section>
+
+    <!-- Pantalla Evento -->
+    <section id="evento" class="pantalla">
+        <h2>Evento Activo</h2>
+
+        <div class="card">
+            <p><strong>Evento:</strong> Taller de Redes</p>
+            <p><strong>Estado:</strong> Activo</p>
+            <p><strong>Hora inicio:</strong> 08:00</p>
+            <p><strong>Tolerancia:</strong> Hasta 08:10</p>
+        </div>
+
+        <button onclick="mostrarPantalla('registro')">
+            Registrar asistencia
+        </button>
+    </section>
+
+    <!-- Pantalla Registro -->
+    <section id="registro" class="pantalla">
+        <h2>Registro de Asistencia</h2>
+
+        <div class="formulario">
+            <label>Nombre participante</label>
+            <input type="text" id="nombre" value="Juan Pérez">
+
+            <label>Hora de llegada</label>
+            <input type="time" id="hora" value="08:14">
+
+            <button onclick="registrarAsistencia()">
+                Registrar
+            </button>
+        </div>
+    </section>
+
+    <!-- Pantalla Resultado -->
+    <section id="resultado" class="pantalla">
+        <h2>Resultado Registro</h2>
+
+        <div class="resultado-card">
+            <p id="mensajeResultado"></p>
+            <p id="estadoResultado"></p>
+            <p id="horaResultado"></p>
+        </div>
+
+        <button>
+            Continuar
+        </button>
+        <button onclick="mostrarPantalla('inicio')">
+        Volver al inicio
+        </button>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
