@@ -15,9 +15,13 @@
 
             <div class="info-evento">
                 <p><strong>Evento:</strong> Reunión General</p>
-                <p><strong>Estado:</strong> <span id="estadoEvento">Activo</span></p>
+                <p><strong>Estado:</strong> Activo</p>
                 <p><strong>Hora inicio:</strong> 08:00</p>
                 <p><strong>Tolerancia:</strong> 10 minutos</p>
+
+                <div class="estado-box">
+                    Evento disponible para registro
+                </div>
             </div>
 
             <button id="btnRegistrar">
@@ -56,8 +60,21 @@
                 <button type="submit">
                     Confirmar registro
                 </button>
+                <button type="button" id="btnFalla">
+                    Simular falla técnica
+                </button>
 
             </form>
+    <div class="historial">
+
+    <h3>Registros recientes</h3>
+    
+    <ul id="listaHistorial">
+        <li>Juan Pérez → atrasado</li>
+        <li>María Soto → presente</li>
+    </ul>
+
+</div>
 
             <div class="mensaje" id="mensajeError"></div>
 
