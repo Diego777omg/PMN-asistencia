@@ -70,6 +70,35 @@ PMN-Asistencia/
 │
 └── README.md
 
+## Uso de la aplicación
+
+Para probar el recorrido principal del sistema se recomienda utilizar los siguientes datos:
+
+### Participante habilitado
+
+```text
+Juan Perez
+```
+
+### Horarios de prueba
+
+- Antes o igual a `08:10` → estado: Presente
+- Después de `08:10` → estado: Atrasado
+
+### Excepciones simuladas
+
+- Ingresar un nombre distinto a `Juan Perez` genera:
+  - Participante no habilitado
+
+- Intentar registrar nuevamente al mismo participante genera:
+  - Registro duplicado
+
+- Cuando el participante queda atrasado:
+  - Se habilita el ingreso de justificación
+  - La justificación es rechazada automáticamente para simular ingreso fuera de plazo
+
+- Si el evento se encuentra finalizado:
+  - El sistema redirige a la pantalla de evento finalizado
 
 ## Funcionalidades implementadas
 
