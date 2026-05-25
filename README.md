@@ -17,7 +17,6 @@ El PMN permite:
 
 Aunque utiliza datos ficticios y lógica simplificada, el sistema representa el comportamiento principal definido previamente en el MPN.
 
----
 
 ## Recorrido principal implementado
 
@@ -34,8 +33,6 @@ El recorrido principal desarrollado corresponde al flujo de registro de asistenc
 7. Ingreso de justificación
 8. Rechazo automático por fuera de plazo
 
----
-
 ## Excepciones implementadas
 
 El PMN considera excepciones importantes del modelo:
@@ -47,7 +44,6 @@ El PMN considera excepciones importantes del modelo:
 
 Estas excepciones modifican directamente el flujo y muestran mensajes visibles al usuario.
 
----
 
 ## Tecnologías utilizadas
 
@@ -57,7 +53,6 @@ Estas excepciones modifican directamente el flujo y muestran mensajes visibles a
 
 No se utilizaron bases de datos ni backend, ya que el objetivo corresponde únicamente a un prototipo navegable.
 
----
 
 ## Estructura del proyecto
 
@@ -75,7 +70,6 @@ PMN-Asistencia/
 │
 └── README.md
 
----
 
 ## Funcionalidades implementadas
 
@@ -110,7 +104,6 @@ La justificación es rechazada automáticamente para simular el comportamiento d
 
 Si se intenta registrar asistencia después de las 18:00, el sistema redirige a una pantalla indicando que el evento ha finalizado.
 
----
 
 ## Objetivo del PMN
 
@@ -126,7 +119,6 @@ El foco principal fue:
 
 No se buscó desarrollar una aplicación completa ni definitiva.
 
----
 
 ## Estado actual del proyecto
 
