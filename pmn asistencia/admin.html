@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrador</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <section class="pantalla activa">
+
+        <div class="card">
+
+            <h1>Panel Administrador</h1>
+
+            <div class="resultado-box">
+                <p><strong>Total registros:</strong><span id="totalRegistros">0</span></p>
+                <p><strong>Presentes:</strong><span id="totalPresentes">0</span></p>
+                <p><strong>Atrasados:</strong><span id="totalAtrasados">0</span></p>
+                <p><strong>Justificaciones:</strong><span id="totalJustificaciones">0</span></p>
+            </div>
+
+            <h2>Registros de asistencia</h2>
+
+            <table id="tablaRegistros">
+
+                <thead>
+                    <tr>
+                        <th>Participante</th>
+                        <th>Hora</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                </tbody>
+
+            </table>
+
+            <h2>Justificaciones</h2>
+
+            <table id="tablaJustificaciones">
+
+                <thead>
+                    <tr>
+                        <th>Participante</th>
+                        <th>Motivo</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                </tbody>
+
+            </table>
+
+            <button id="btnVolver">
+                Volver al sistema
+            </button>
+
+        </div>
+
+    </section>
+
+    <script src="js/admin.js"></script>
+
+</body>
+</html>
