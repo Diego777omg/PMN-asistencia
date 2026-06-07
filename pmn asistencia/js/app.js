@@ -3,6 +3,7 @@ const pantallaFormulario = document.getElementById("pantallaFormulario");
 const pantallaResultado = document.getElementById("pantallaResultado");
 
 const btnRegistrar = document.getElementById("btnRegistrar");
+const btnAdministrador = document.getElementById("btnAdministrador");
 const volverInicio = document.getElementById("volverInicio");
 const volverMenu = document.getElementById("volverMenu");
 
@@ -21,7 +22,26 @@ const btnFalla = document.getElementById("btnFalla");
 
 const listaHistorial = document.getElementById("listaHistorial");
 
-let registroExistente = false;
+// LOCAL STORAGE
+
+let registros =
+    JSON.parse(localStorage.getItem("registros")) || [];
+
+let justificaciones =
+    JSON.parse(localStorage.getItem("justificaciones")) || [];
+
+// CARGAR HISTORIAL
+
+registros.forEach(registro => {
+
+    const item = document.createElement("li");
+
+    item.textContent =
+        `${registro.nombre} → ${registro.estado}`;
+
+    listaHistorial.appendChild(item);
+
+});
 
 function cambiarPantalla(pantalla){
 
@@ -35,6 +55,12 @@ function cambiarPantalla(pantalla){
 btnRegistrar.addEventListener("click", () => {
 
     cambiarPantalla(pantallaFormulario);
+
+});
+
+btnAdministrador.addEventListener("click", () => {
+
+    window.location.href = "admin.html";
 
 });
 
@@ -90,9 +116,13 @@ formAsistencia.addEventListener("submit", (e) => {
         return;
     }
 
-    // VALIDACION DUPLICIDAD
+   // VALIDACION DUPLICIDAD
 
-    if(registroExistente){
+    const yaRegistrado = registros.some(registro =>
+        registro.nombre.toLowerCase() === nombre.toLowerCase()
+    );
+
+    if(yaRegistrado){
 
         mensajeError.textContent =
             "Registro duplicado detectado.";
@@ -115,11 +145,7 @@ formAsistencia.addEventListener("submit", (e) => {
 
         return;
     }
-
-    registroExistente = true;
     
-    
-
     resultadoNombre.textContent = nombre;
     resultadoHora.textContent = hora;
 
@@ -148,14 +174,31 @@ if(hora <= "08:10"){
     bloqueJustificacion.classList.remove("oculto");
 }
 
-    // AGREGAR AL HISTORIAL
+    // AGREGAR AL HISTORIAL VISUAL
 
-    const nuevoRegistro = document.createElement("li");
+    const itemHistorial = document.createElement("li");
 
-    nuevoRegistro.textContent =
+    itemHistorial.textContent =
         `${nombre} → ${estadoFinal}`;
 
-    listaHistorial.appendChild(nuevoRegistro);
+    listaHistorial.appendChild(itemHistorial);
+
+    // GUARDAR REGISTRO
+
+    const nuevoRegistro = {
+
+        nombre: nombre,
+        hora: hora,
+        estado: estadoFinal
+
+    };
+
+    registros.push(nuevoRegistro);
+
+    localStorage.setItem(
+        "registros",
+        JSON.stringify(registros)
+    );
 
     cambiarPantalla(pantallaResultado);
 
@@ -163,12 +206,33 @@ if(hora <= "08:10"){
 
 btnJustificar.addEventListener("click", () => {
 
+    const motivo =
+        document.getElementById("textoJustificacion").value;
+
+    const nuevaJustificacion = {
+
+        nombre: resultadoNombre.textContent,
+
+        motivo: motivo,
+
+        resultado: "Rechazada"
+
+    };
+
+    justificaciones.push(nuevaJustificacion);
+
+    localStorage.setItem(
+        "justificaciones",
+        JSON.stringify(justificaciones)
+    );
+
     mensajeJustificacion.textContent =
         "Justificación rechazada por ingreso fuera de plazo.";
 
     mensajeJustificacion.classList.add("error");
 
 });
+
 btnFalla.addEventListener("click", () => {
 
     mensajeError.textContent =
