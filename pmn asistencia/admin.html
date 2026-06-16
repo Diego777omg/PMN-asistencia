@@ -24,6 +24,16 @@
 
             <h2>Registros de asistencia</h2>
 
+            <label for="filtroEstado">
+                Filtrar registros:
+            </label>
+
+            <select id="filtroEstado">
+                <option value="Todos">Todos</option>
+                <option value="Presente">Presentes</option>
+                <option value="Atrasado">Atrasados</option>
+            </select>
+
             <table id="tablaRegistros">
 
                 <thead>
@@ -55,6 +65,10 @@
                 </tbody>
 
             </table>
+
+            <button id="btnLimpiar">
+                Limpiar datos
+            </button>
 
             <button id="btnVolver">
                 Volver al sistema
