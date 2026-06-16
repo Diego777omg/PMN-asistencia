@@ -19,24 +19,54 @@ const justificaciones =
 const cuerpoRegistros =
     document.querySelector("#tablaRegistros tbody");
 
-registros.forEach(registro => {
+const filtroEstado =
+    document.getElementById("filtroEstado");
 
-    const fila = document.createElement("tr");
+function cargarRegistros(estadoSeleccionado = "Todos") {
 
-    const claseEstado =
-        registro.estado === "Presente"
-            ? "exito"
-            : "error";
+    cuerpoRegistros.innerHTML = "";
 
-    fila.innerHTML = `
-        <td>${registro.nombre}</td>
-        <td>${registro.hora}</td>
-        <td class="${claseEstado}">
-            ${registro.estado}
-        </td>
-    `;
+    let registrosFiltrados = registros;
 
-    cuerpoRegistros.appendChild(fila);
+    if (estadoSeleccionado !== "Todos") {
+
+        registrosFiltrados = registros.filter(
+            registro =>
+                registro.estado === estadoSeleccionado
+        );
+
+    }
+
+    registrosFiltrados.forEach(registro => {
+
+        const fila = document.createElement("tr");
+
+        const claseEstado =
+            registro.estado === "Presente"
+                ? "exito"
+                : "error";
+
+        fila.innerHTML = `
+            <td>${registro.nombre}</td>
+            <td>${registro.hora}</td>
+            <td class="${claseEstado}">
+                ${registro.estado}
+            </td>
+        `;
+
+        cuerpoRegistros.appendChild(fila);
+
+    });
+
+}
+
+cargarRegistros();
+
+filtroEstado.addEventListener("change", () => {
+
+    cargarRegistros(
+        filtroEstado.value
+    );
 
 });
 
@@ -76,3 +106,25 @@ document.getElementById("totalAtrasados").textContent =
 
 document.getElementById("totalJustificaciones").textContent =
     justificaciones.length;
+
+// LIMPIAR DATOS
+
+const btnLimpiar =
+    document.getElementById("btnLimpiar");
+
+btnLimpiar.addEventListener("click", () => {
+
+    const confirmar = confirm(
+        "¿Desea eliminar todos los registros almacenados?"
+    );
+
+    if (!confirmar) {
+        return;
+    }
+
+    localStorage.removeItem("registros");
+    localStorage.removeItem("justificaciones");
+
+    location.reload();
+
+});
