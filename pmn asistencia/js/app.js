@@ -22,6 +22,15 @@ const btnFalla = document.getElementById("btnFalla");
 
 const listaHistorial = document.getElementById("listaHistorial");
 
+// PARTICIPANTES HABILITADOS
+
+const participantesHabilitados = [
+    "juan perez",
+    "maria gonzalez",
+    "pedro rojas",
+    "ana martinez"
+];
+
 // LOCAL STORAGE
 
 let registros =
@@ -106,7 +115,11 @@ formAsistencia.addEventListener("submit", (e) => {
 
     // VALIDACION PARTICIPANTE
 
-    if(nombre.toLowerCase() !== "juan perez"){
+    if(
+        !participantesHabilitados.includes(
+            nombre.toLowerCase()
+        )
+    ){
 
         mensajeError.textContent =
             "Participante no habilitado.";
@@ -116,7 +129,7 @@ formAsistencia.addEventListener("submit", (e) => {
         return;
     }
 
-   // VALIDACION DUPLICIDAD
+    // VALIDACION DUPLICIDAD
 
     const yaRegistrado = registros.some(registro =>
         registro.nombre.toLowerCase() === nombre.toLowerCase()
@@ -145,7 +158,7 @@ formAsistencia.addEventListener("submit", (e) => {
 
         return;
     }
-    
+
     resultadoNombre.textContent = nombre;
     resultadoHora.textContent = hora;
 
@@ -153,26 +166,26 @@ formAsistencia.addEventListener("submit", (e) => {
 
     // DETERMINACION DE ATRASO
 
-if(hora <= "08:10"){
+    if(hora <= "08:10"){
 
-    estadoFinal = "Presente";
+        estadoFinal = "Presente";
 
-    resultadoEstado.textContent = estadoFinal;
+        resultadoEstado.textContent = estadoFinal;
 
-    resultadoEstado.className = "exito";
+        resultadoEstado.className = "exito";
 
-    bloqueJustificacion.classList.add("oculto");
+        bloqueJustificacion.classList.add("oculto");
 
-}else{
+    }else{
 
-    estadoFinal = "Atrasado";
+        estadoFinal = "Atrasado";
 
-    resultadoEstado.textContent = estadoFinal;
+        resultadoEstado.textContent = estadoFinal;
 
-    resultadoEstado.className = "error";
+        resultadoEstado.className = "error";
 
-    bloqueJustificacion.classList.remove("oculto");
-}
+        bloqueJustificacion.classList.remove("oculto");
+    }
 
     // AGREGAR AL HISTORIAL VISUAL
 
