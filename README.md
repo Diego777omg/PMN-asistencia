@@ -18,6 +18,8 @@ El PMV permite:
 * Almacenar justificaciones
 * Visualizar información administrativa
 * Consultar estadísticas básicas
+* Filtrar registros de asistencia
+* Eliminar datos almacenados para reiniciar pruebas
 
 Aunque utiliza datos ficticios y lógica simplificada, el sistema representa el comportamiento principal definido previamente en el modelo del proceso.
 
@@ -40,6 +42,8 @@ El recorrido principal desarrollado corresponde al flujo de registro de asistenc
 8. Ingreso de justificación
 9. Almacenamiento de información
 10. Consulta desde el panel administrador
+11. Filtrado de registros
+12. Persistencia de información después de recargar la página
 
 ---
 
@@ -91,12 +95,15 @@ PMV-Asistencia/
 
 ## Uso de la aplicación
 
-Para probar el recorrido principal del sistema se recomienda utilizar los siguientes datos:
+Para probar el recorrido principal del sistema se recomienda utilizar los siguientes participantes habilitados:
 
-### Participante habilitado
+### Participantes habilitados
 
 ```text
 Juan Perez
+Maria Gonzalez
+Pedro Rojas
+Ana Martinez
 ```
 
 ### Horarios de prueba
@@ -104,17 +111,32 @@ Juan Perez
 * Antes o igual a 08:10 → estado: Presente
 * Después de 08:10 → estado: Atrasado
 
+### Ejemplo de ejecución completa
+
+1. Registrar a Juan Perez a las 08:00.
+2. Registrar a Maria Gonzalez a las 08:20.
+3. Registrar a Pedro Rojas a las 08:05.
+4. Registrar a Ana Martinez a las 08:30.
+5. Ingresar una justificación para un participante atrasado.
+6. Acceder al panel administrador.
+7. Verificar registros almacenados.
+8. Verificar estadísticas.
+9. Verificar justificaciones registradas.
+10. Utilizar el filtro de registros.
+11. Recargar la página y comprobar que los datos permanecen almacenados.
+12. Utilizar la opción de limpieza de datos para reiniciar el sistema.
+
 ### Excepciones simuladas
 
-* Ingresar un nombre distinto a Juan Perez genera:
+* Ingresar un nombre distinto a los participantes habilitados genera:
 
   * Participante no habilitado
 
-* Intentar registrar nuevamente al mismo participante genera:
+* Intentar registrar nuevamente a un participante ya registrado genera:
 
   * Registro duplicado
 
-* Cuando el participante queda atrasado:
+* Cuando un participante queda atrasado:
 
   * Se habilita el ingreso de justificación
   * La justificación es rechazada automáticamente para simular ingreso fuera de plazo
@@ -158,19 +180,22 @@ La justificación es almacenada junto con el resultado de rechazo simulado y pos
 
 Los registros de asistencia y las justificaciones se almacenan mediante LocalStorage.
 
-Esto permite conservar la información incluso después de recargar la página.
+Esto permite conservar la información incluso después de recargar la página o cerrar el navegador.
 
 ### Historial de registros
 
 El sistema muestra un historial de registros realizados durante el uso de la aplicación.
 
+El historial también se reconstruye automáticamente utilizando la información almacenada.
+
 ### Panel Administrador
 
 El sistema incorpora una vista administrativa que permite:
 
-* Consultar registros de asistencia
-* Consultar justificaciones
-* Revisar estados registrados
+* Consultar registros de asistencia almacenados
+* Consultar justificaciones registradas
+* Revisar estados de asistencia
+* Visualizar estadísticas generales
 
 ### Estadísticas
 
@@ -180,6 +205,22 @@ El panel administrador muestra indicadores básicos:
 * Total de presentes
 * Total de atrasados
 * Total de justificaciones
+
+### Filtrado de registros
+
+El administrador puede filtrar la información visualizada según el estado de asistencia:
+
+* Todos los registros
+* Participantes presentes
+* Participantes atrasados
+
+Esto facilita la consulta y revisión de la información almacenada.
+
+### Limpieza de datos
+
+El panel administrador incorpora una función para eliminar los registros y justificaciones almacenados en LocalStorage.
+
+Esta funcionalidad permite reiniciar el sistema para nuevas pruebas y demostraciones.
 
 ### Evento finalizado
 
@@ -203,6 +244,7 @@ El foco principal fue:
 * Simulación de decisiones reales
 * Representación de estados y excepciones
 * Visualización administrativa
+* Consulta de información almacenada
 * Experiencia básica de usuario
 
 No se buscó desarrollar una aplicación completa ni definitiva.
@@ -211,6 +253,15 @@ No se buscó desarrollar una aplicación completa ni definitiva.
 
 ## Estado actual del proyecto
 
-El PMV se encuentra funcional para el recorrido principal definido y permite registrar asistencias, almacenar información localmente, gestionar justificaciones y visualizar datos desde un panel administrativo básico.
+El PMV se encuentra funcional para el recorrido principal definido y permite registrar asistencias, almacenar información localmente, gestionar justificaciones y visualizar datos desde un panel administrativo.
 
-La implementación actual constituye una base funcional para futuras extensiones e integraciones con bases de datos o servicios backend.
+Actualmente el sistema permite:
+
+* Registrar múltiples participantes habilitados
+* Mantener la información mediante LocalStorage
+* Consultar registros y justificaciones desde el panel administrador
+* Visualizar estadísticas de asistencia
+* Filtrar registros por estado
+* Eliminar datos almacenados para reiniciar las pruebas
+
+La implementación actual constituye una base funcional para futuras extensiones e integraciones con bases de datos o servicios backend, manteniendo coherencia con los modelos definidos en las fases anteriores del proyecto.
